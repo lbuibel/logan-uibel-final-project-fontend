@@ -25,7 +25,7 @@
               >
               <iframe
               width="100%"
-              src="https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d97145.8544357055!2d-111.76778713327369!3d40.45738741384057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e1!4m4!2zNDDCsDI1JzU2LjYiTiAxMTHCsDQ0JzU1LjMiVw!3m2!1d40.4323889!2d-111.74869439999999!4m4!2zNDDCsDI4JzU2LjgiTiAxMTHCsDM4JzQ5LjciVw!3m2!1d40.4824444!2d-111.6471389!5e0!3m2!1sen!2sus!4v1583960279563!5m2!1sen!2sus" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+              :src= "route.iframeData" >
               >
               </iframe>
                 <v-card-title>

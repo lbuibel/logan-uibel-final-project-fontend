@@ -4,5 +4,6 @@ query allRoutes {
     name
     type
     miles
+    iframeData
   }
 }
