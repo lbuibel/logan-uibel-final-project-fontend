@@ -5,7 +5,7 @@
 
        <!-- Apollo watched Graphql query -->
     <ApolloQuery
-      :query="require('../graphql/HelloWorld.gql')"
+      :query="require('../graphql/AllRoutes.gql')"
     >
       <template v-slot="{ result: { loading, error, data } }">
         <!-- Loading -->
@@ -17,14 +17,15 @@
         <!-- Result -->
         <div v-else-if="data" class="result apollo">  
           <v-row class="flex-wrap">
-            <v-col col="12" sm="6" md="4" v-for="(route, i) in data.Routes" :key="i">
+            <v-col col="12" xs="12" sm="12" md="6" v-for="(route, i) in data.Routes" :key="i">
               <v-card
               class="mx-auto"
-              max-width="344"
-              min-height="300"
+              max-width="500"
+              min-height="500"
               >
               <iframe
               width="100%"
+              height="350"
               :src= "route.iframeData" >
               >
               </iframe>
@@ -52,7 +53,7 @@
 
 <script>
   export default {
-    name: 'HelloWorld',
+    name: 'AllRoutes',
 
     data: () => ({
       

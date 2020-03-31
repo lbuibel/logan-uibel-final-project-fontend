@@ -1,0 +1,14 @@
+mutation AddRoute ($name: String!, $type: String!, $miles: Float!, $startPoint: String!, $endPoint: String!, $startingElevation: Int!, $finalElevation: Int, $iframeData: String!){
+    createRoute (
+        name: $name,
+        type: $type,
+        miles: $miles,
+        startPoint: $startPoint,
+        endPoint: $endPoint,
+        startingElevation: $startingElevation,
+        finalElevation: $finalElevation,
+        iframeData: $iframeData
+    ) {
+        id
+    }
+}

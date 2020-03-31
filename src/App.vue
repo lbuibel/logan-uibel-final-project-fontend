@@ -8,20 +8,23 @@
     </v-app-bar>
 
     <v-content>
-      <HelloWorld/>
+      <addRoute/>
+      <!-- <AllRoutes/> -->
     </v-content>
   </v-app>
 </template>
 
 <script>
 // import ApolloExample from './components/ApolloExample';
-import HelloWorld from './components/HelloWorld'
+// import AllRoutes from './components/AllRoutes'
+import AddRoute from './components/AddRoute'
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    // AllRoutes,
+    AddRoute,
   },
 
   data: () => ({
