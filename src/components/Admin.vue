@@ -1,4 +1,7 @@
 <template>
+<v-container>
+    <h1>Routes</h1>
+   <hr>
     <ApolloMutation
     :mutation="require('../graphql/AddRoute.gql')"
     :variables="{
@@ -12,6 +15,7 @@
         iframeData,
         }"
         @done="onDone"
+        class="mt-10"
     >
     <template v-slot="{ mutate, loading, error }">
         <!-- Form here -->
@@ -57,6 +61,7 @@
         </v-form>
     </template>
     </ApolloMutation>
+</v-container>
 </template>
 
 <script>
