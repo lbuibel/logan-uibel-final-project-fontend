@@ -8,8 +8,13 @@
     </v-app-bar>
 
     <v-content>
-      <addRoute/>
+      <div>
+        <router-link to="/">Home</router-link>
+        <router-link to="/add-route">Add Route</router-link>
+      <!-- <addRoute/> -->
       <!-- <AllRoutes/> -->
+      </div>
+      <router-view/>
     </v-content>
   </v-app>
 </template>
@@ -17,14 +22,14 @@
 <script>
 // import ApolloExample from './components/ApolloExample';
 // import AllRoutes from './components/AllRoutes'
-import AddRoute from './components/AddRoute'
+// import AddRoute from './components/AddRoute'
 
 export default {
   name: 'App',
 
   components: {
     // AllRoutes,
-    AddRoute,
+    // AddRoute,
   },
 
   data: () => ({
