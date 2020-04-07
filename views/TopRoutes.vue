@@ -1,17 +1,17 @@
 <template>
     <div>
-        <Admin/>
+        <Routes/>
     </div>
 </template>
 
 <script>
 
-import Admin from "@/components/Admin.vue"
+import Routes from "@/components/TopRoutes.vue"
 
 export default {
-    name: "admin",
+    name: "topRoutes",
     components: {
-        Admin
+        Routes
     }
 }
 </script>

@@ -5,6 +5,7 @@
 
       <v-toolbar-items>
         <v-btn text to="/">Home</v-btn>
+        <v-btn text to="top-routes">Top Routes</v-btn>
         <v-btn text to="add-route">Add Route</v-btn>
       </v-toolbar-items>
     </v-toolbar>
