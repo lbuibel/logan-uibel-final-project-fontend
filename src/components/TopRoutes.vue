@@ -4,7 +4,7 @@
         <hr>
           <v-row class="flex-wrap">
               <v-col col="12" xs="12" sm="12" md="6" lg="4"
-              v-for="(route) in routes"
+              v-for="(route) in routes.slice(0, 10)"
                :key="route._id"
                >
                 <p> {{ route.name }} </p>
