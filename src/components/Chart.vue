@@ -1,31 +1,33 @@
 <template>
     <v-container>
-        <h1>Route Elevation Data</h1>
+        <h1>Route Elevation Change</h1>
         <hr>
-
-
-        <!-- <div class="graph-container">
-        <ul class="bargraph">
-            <li v-for="(route) in routes"
-            :key="route.id"
-            :style="{ width: (route.finalElevation/100 - route.startingElevation/100) *2.5 + '%'}"
-            >
-            {{ route.name }}
-            </li>
-        </ul>
-        </div> -->
-
         <dl>
-        <dt>
-            Route Difficulty By Elevation Gained
-        </dt>
             <dd v-for="(route) in routes"
             :key="route.id"
-            v-bind:class="['percentage', `percentage-${ Math.floor(route.finalElevation/100 - route.startingElevation/100) }`]"
+            v-bind:class="['percentage', `percentage-${ (Math.floor(route.finalElevation/100 - route.startingElevation/100))*2 }`]"
             >
+            <span class="elevation-change"> {{ route.finalElevation - route.startingElevation }} ft.</span>
             <span class="text">{{ route.name }}</span>
             </dd>
         </dl>
+        <br>
+        <br>
+
+        <h1>Route Distance</h1>
+        <hr>
+        <dl>
+            <dd v-for="(route) in routes"
+            :key="route.id"
+            v-bind:class="['percentage', `percentage-${ (Math.floor(route.miles)*3) }`]"
+            >
+            <span class="elevation-change"> {{ route.miles }} miles</span>
+            <span class="text">{{ route.name }}</span>
+            </dd>
+        </dl>
+
+        <br>
+        <br>
 
     </v-container>
 </template>
@@ -50,35 +52,38 @@ data () {
 </script>
 
 <style lang="scss" scoped>
-
+h3 {
+    margin-left: -20px;
+}
 
 dl {
   display: flex;
   background-color: white;
   flex-direction: column;
   width: 100%;
-  max-width: 700px;
+  max-width: 90%;
   position: relative;
-  padding: 20px;
+margin-top: 40px;
 }
 
-dt {
-  align-self: flex-start;
-  width: 100%;
-  font-weight: 700;
-  display: block;
-  text-align: center;
-  font-size: 1.2em;
-  font-weight: 700;
-  margin-bottom: 20px;
-  margin-left: 130px;
+
+
+.elevation-change {
+    color: white;
+    font-size: .75rem;
+    text-transform: lowercase;
+    padding-left: 1%;
+    z-index: 20;
+    position: absolute;
+    transform: translateY(50%)
 }
 
 .text {
   display: flex;
   align-items: center;
-  height: 40px;
-  width: 130px;
+  font-size: .75rem;
+  height: 30px;
+  width: 25%;
   background-color: white;
   position: absolute;
   left: 0;
@@ -91,7 +96,7 @@ dt {
   text-transform: uppercase;
   width: 100%;
   height: 40px;
-  margin-left: 130px;
+  margin-left: 30%;
   background: repeating-linear-gradient(
   to right,
   #ddd,
@@ -104,11 +109,10 @@ dt {
     content: "";
     display: block;
     background-color: #3b86d8;
-    width: 0px;
     margin-bottom: 10px;
-    height: 90%;
+    height: 85%;
     position: relative;
-    top: 50%;
+    top: 30%;
     transform: translateY(-50%);
   }
 }
