@@ -1,4 +1,3 @@
-
 query allRoutes {
   Routes {
     name

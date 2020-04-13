@@ -2,20 +2,20 @@
   <v-container>
    <h1>Routes</h1>
    <hr>
-
+  <Search></Search>
        <!-- Apollo watched Graphql query -->
-    <!-- <ApolloQuery
+    <ApolloQuery
       :query="require('../graphql/AllRoutes.gql')"
-    > -->
-      <!-- <template v-slot="{ result: { loading, error, data } }"> -->
+    >
+      <template v-slot="{ result: { loading, error, data } }">
         <!-- Loading -->
-        <!-- <div v-if="loading" class="loading apollo">Loading...</div> -->
+        <div v-if="loading" class="loading apollo">Loading...</div>
 
         <!-- Error -->
-        <!-- <div v-else-if="error" class="error apollo">An error occured</div> -->
+        <div v-else-if="error" class="error apollo">An error occured</div>
 
         <!-- Result -->
-        <!-- <div v-else-if="data" class="result apollo">  
+        <div v-else-if="data" class="result apollo">  
           <v-row class="flex-wrap">
             <v-col col="12" xs="12" sm="12" md="6" v-for="(route, i) in data.Routes" :key="i">
               <v-card
@@ -23,12 +23,12 @@
               max-width="500"
               min-height="500"
               >
-              <iframe
+              <!-- <iframe
               width="100%"
               height="350"
               :src= "route.iframeData" >
               >
-              </iframe>
+              </iframe> -->
                 <v-card-title>
                 {{ route.name }}
               </v-card-title>
@@ -41,22 +41,27 @@
               </v-card>
             </v-col>
           </v-row> 
-        </div> -->
+        </div>
 
         <!-- No result -->
-        <!-- <div v-else class="no-result apollo">No result :(</div>
+        <div v-else class="no-result apollo">No result :(</div>
       </template>
-    </ApolloQuery> -->
+    </ApolloQuery>
 
   </v-container>
 </template>
 
 <script>
+import Search from '../components/SearchGQL'
   export default {
     name: 'AllRoutes',
-
-    data: () => ({
-    }),
+    data: () => {
+      return {
+      }
+    },
+    components: {
+      Search,
+    },
   }
 </script>
 
