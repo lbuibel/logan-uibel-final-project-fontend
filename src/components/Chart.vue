@@ -63,7 +63,7 @@ dl {
   width: 100%;
   max-width: 90%;
   position: relative;
-margin-top: 40px;
+  margin-top: 40px;
 }
 
 

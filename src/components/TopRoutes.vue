@@ -4,7 +4,7 @@
         <hr>
           <v-row class="flex-wrap">
               <v-col col="12" xs="12" sm="12"
-              v-for="(route) in routes.slice(0, 10)"
+              v-for="(route) in routes"
                :key="route._id"
                >
                 <div class="large-card">
@@ -43,7 +43,7 @@ data () {
   mounted () {
     axios
       .get('https://bike-routes-api.herokuapp.com/course/getAllCourses')
-      .then(response => (this.routes = response.data))
+      .then(response => (this.routes = response.data.slice(0, 10)))
       .catch(error => console.log(error))
   }
 
