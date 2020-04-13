@@ -20,11 +20,11 @@
         <v-form>
             <v-container>
                 <h2>Update Route</h2>
-                <!-- <v-row>
+                <v-row>
                     <v-col cols="12" sm="8" md="6">
                         <v-text-field v-model="id" label="Route ID" required></v-text-field>
                     </v-col>
-                </v-row> -->
+                </v-row>
                 <v-row>
                     <v-col cols="12" sm="8" md="6">
                         <v-text-field v-model="name" label="Name" required></v-text-field>
@@ -71,15 +71,15 @@
 export default {
         data: () => {
         return {
-            id: 'ck8ytwmtz0004d36ef5c55kbn',
-            name: 'test 3.0',
-            type: 'paved',
-            miles: 2,
+            id: '',
+            name: '',
+            type: '',
+            miles: null,
             startPoint: '123',
             endPoint: '456',
-            startingElevation: 2,
-            finalElevation: 6,
-            iframeData: 'testing',
+            startingElevation: null,
+            finalElevation: null,
+            iframeData: '',
             types: ['paved', 'singletrack', 'gravel']
         }
     },

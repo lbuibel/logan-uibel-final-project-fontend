@@ -1,0 +1,7 @@
+mutation DeleteRoute ($id: String!){
+  deleteOneRoute (where: {
+    id: $id
+  }) {
+  id,
+  }
+}

@@ -4,6 +4,7 @@
    <hr>
    <AddRoute></AddRoute>
    <UpdateRoute></UpdateRoute>
+   <DeleteRoute/>
 
 </v-container>
 </template>
@@ -11,11 +12,13 @@
 <script>
 import AddRoute from '../components/AddRouteQQL'
 import UpdateRoute from '../components/UpdateRouteQQL'
+import DeleteRoute from '../components/DeleteRouteGQL'
 export default {
     name: 'admin',
     components: {
         AddRoute,
-        UpdateRoute
+        UpdateRoute,
+        DeleteRoute,
     }
 }
 </script>
