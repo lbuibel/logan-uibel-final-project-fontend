@@ -1,5 +1,21 @@
 <template>
-  <v-container>
+  <div>
+      <v-parallax
+    src="../../public/assets/bike_sign.jpeg"
+    class="m-0"
+  >
+    <v-row
+      align="center"
+      justify="center"
+    >
+      <v-col class="text-center" cols="12">
+        <h1 class="display-3 font-weight-thin mb-4">Bike Routes</h1>
+        <!-- <h4 class="subheading">Build your application today!</h4> -->
+      </v-col>
+    </v-row>
+  </v-parallax>
+    
+    <v-container>
    <h1>Routes</h1>
    <hr>
   <Search></Search>
@@ -56,6 +72,7 @@
     </ApolloQuery>
 
   </v-container>
+  </div>
 </template>
 
 <script>
@@ -73,3 +90,8 @@ import Search from '../components/SearchGQL'
   }
 </script>
 
+<style scoped>
+v-img {
+  border: solid red;
+}
+</style>

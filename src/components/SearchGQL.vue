@@ -3,11 +3,11 @@
         <!-- <input v-model="searchString" placeholder="Search"><br> -->
         <!-- {{ entries }} -->
         <v-card
-            color="red lighten-2"
+            color="grey darken-1"
             dark
             >
-            <v-card-title class="headline red lighten-3">
-            Search for Routes
+            <v-card-title class="headline grey">
+            Quick Search
             </v-card-title>
             <v-card-text>
             <v-autocomplete
@@ -23,11 +23,12 @@
                 placeholder="Start typing to Search"
                 prepend-icon="mdi-database-search"
                 return-object
+                class="mt-4"
             ></v-autocomplete>
             </v-card-text>
             <v-divider></v-divider>
         <v-expand-transition>
-        <v-list v-if="searchString" class="red lighten-3">
+        <v-list v-if="searchString" class="grey">
 
             <ApolloQuery
             :query="require('../graphql/SearchRoutes.gql')"
@@ -54,15 +55,12 @@
                     >
                     <v-list-item-content>
                         <v-list-item-title> {{  route.name }}</v-list-item-title>
-                        <v-list-item-subtitle> {{  route.miles }}</v-list-item-subtitle>
-                        <v-list-item-subtitle> {{  route.id }}</v-list-item-subtitle>
+                        <v-list-item-subtitle>Miles: {{  route.miles }}</v-list-item-subtitle>
+                        <v-list-item-subtitle>Starting Elevation {{  route.startingElevation }} ft.</v-list-item-subtitle>
+                        <v-list-item-subtitle>Final Elevation {{  route.finalElevation }} ft.</v-list-item-subtitle>
+                        <v-list-item-subtitle>Elevation Gain {{  route.finalElevation - route.startingElevation }} ft.</v-list-item-subtitle>
                     </v-list-item-content>
                     </v-list-item>
-                    <!-- <v-col col="12" xs="12" sm="12" md="6" v-for="(route, i) in data.Routes" :key="i">
-                        <v-list-item-content>
-
-                        </v-list-item-content>
-                     </v-col> -->
                 </div>
 
                     <div v-else class="no-result apollo">

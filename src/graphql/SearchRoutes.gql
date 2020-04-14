@@ -3,5 +3,7 @@ query SearchRoute ($searchString: String){
       id
       name
       miles
+      startingElevation
+      finalElevation
   }
 }
