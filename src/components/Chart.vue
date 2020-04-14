@@ -2,6 +2,14 @@
     <v-container>
         <h1>Route Elevation Change</h1>
         <hr>
+
+        <section v-if="error">
+            <p>Unable to retrieve data</p>
+        </section>
+
+        <section v-else>
+            <div v-if="loading">Loading...</div>
+
         <dl>
             <dd v-for="(route) in routes"
             :key="route.id"
@@ -25,9 +33,7 @@
             <span class="text">{{ route.name }}</span>
             </dd>
         </dl>
-
-        <br>
-        <br>
+        </section>
 
     </v-container>
 </template>
@@ -40,6 +46,8 @@ export default {
 data () {
     return {
       routes: null,
+      loading: true,
+      error: false,
     }
   },
   mounted () {
@@ -47,6 +55,7 @@ data () {
       .get('https://bike-routes-api.herokuapp.com/course/getAllCourses')
       .then(response => (this.routes = response.data))
       .catch(error => console.log(error))
+      .finally(() => this.loading = false)
   },
 }
 </script>

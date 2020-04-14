@@ -25,29 +25,73 @@
                 return-object
             ></v-autocomplete>
             </v-card-text>
+            <v-divider></v-divider>
+        <v-expand-transition>
+        <v-list v-if="searchString" class="red lighten-3">
+
+            <ApolloQuery
+            :query="require('../graphql/SearchRoutes.gql')"
+            :variables="{ searchString }"
+            >
+            <template v-slot="{ result: { loading, error, data } }">
+
+                <div v-if="loading" class="loading apollo">
+                    <v-list-item>
+                        <v-list-item-content>Loading...</v-list-item-content>
+                    </v-list-item>
+                </div>
+
+                <div v-else-if="error" class="error apollo">
+                    <v-list-item>
+                        <v-list-item-content>An Error Occured...</v-list-item-content>
+                    </v-list-item>
+                </div>
+
+                <div v-else-if="data" class="result apollo">
+                    <v-list-item
+                    v-for="(route, i) in data.Routes" 
+                    :key="i"
+                    >
+                    <v-list-item-content>
+                        <v-list-item-title> {{  route.name }}</v-list-item-title>
+                        <v-list-item-subtitle> {{  route.miles }}</v-list-item-subtitle>
+                        <v-list-item-subtitle> {{  route.id }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                    </v-list-item>
+                    <!-- <v-col col="12" xs="12" sm="12" md="6" v-for="(route, i) in data.Routes" :key="i">
+                        <v-list-item-content>
+
+                        </v-list-item-content>
+                     </v-col> -->
+                </div>
+
+                    <div v-else class="no-result apollo">
+                    <v-list-item>
+                        <v-list-item-content>No Results...</v-list-item-content>
+                    </v-list-item>
+                    </div>
+                    </template>
+                </ApolloQuery>
+
+        </v-list>
+            <v-expand-transition>
+            </v-expand-transition>
+
+    </v-expand-transition>
+        <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn
+        :disabled="!searchString"
+        color="grey darken-3"
+        @click="searchString = null"
+      >
+        Clear
+        <v-icon right>mdi-close-circle</v-icon>
+      </v-btn>
+    </v-card-actions>
         </v-card>
 
-        <ApolloQuery
-        :query="require('../graphql/SearchRoutes.gql')"
-        :variables="{ searchString }"
-        >
-            <template v-slot="{ result: { loading, error, data } }">
-            <!-- Loading -->
-            <div v-if="loading" class="loading apollo">Loading...</div>
 
-            <!-- Error -->
-            <div v-else-if="error" class="error apollo">An error occurred</div>
-
-            <!-- Result -->
-            <div v-else-if="data" class="result apollo">
-                <v-col col="12" xs="12" sm="12" md="6" v-for="(route, i) in data.Routes" :key="i">
-                    <p>{{  route.name  }} {{  route.miles  }}</p>
-                </v-col>
-            </div>
-            <!-- No result -->
-            <div v-else class="no-result apollo">No result :(</div>
-            </template>
-        </ApolloQuery>
 
 
     </div>
@@ -65,45 +109,36 @@ import axios from 'axios'
       model: null,
       search: null
     }),
-    mounted () {
-        axios
-        .get('https://bike-routes-api.herokuapp.com/course/getAllCourses')
-        .then(response => (this.entries = response.data))
-        .catch(error => console.log(error))
-        .finally(() => (this.isLoading = false))
-  },
       computed: {
       fields () {
-        if (!this.model) return []
+        if (!this.searchString) return []
 
-        return Object.keys(this.model).map(key => {
+        return Object.keys(this.searchString).map(key => {
           return {
             key,
-            value: this.model[key] || 'n/a',
+            value: this.searchString[key] || 'n/a',
           }
         })
       },
       items () {
           return this.entries.map(entry => entry.name)
       }
-    //   items () {
-    //     return this.entries.map(entry => {
-    //       const Description = entry.Description.length > this.descriptionLimit
-    //         ? entry.Description.slice(0, this.descriptionLimit) + '...'
-    //         : entry.Description
+      },
+      watch: {
+          search () {
+          if (this.items.length > 0) return
 
-    //       return Object.assign({}, entry, { Description })
-    //     })
-    //   },
-    },
-//   items () {
-//         return this.entries.map(entry => {
-//           const Description = entry.name.length > this.name
-//             ? entry.name.slice(0, this.name) + '...'
-//             : entry.name
+          // Items have already been requested
+          if (this.isLoading) return
 
-//           return Object.assign({}, entry, { Description })
-//         })
-//     }
+          this.isLoading = true
+
+        axios
+        .get('https://bike-routes-api.herokuapp.com/course/getAllCourses')
+        .then(response => (this.entries = response.data))
+        .catch(error => console.log(error))
+        .finally(() => (this.isLoading = false))
+          }
+      }
   }
 </script>

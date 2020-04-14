@@ -18,27 +18,34 @@
         <div v-else-if="data" class="result apollo">  
           <v-row class="flex-wrap">
             <v-col col="12" xs="12" sm="12" md="6" v-for="(route, i) in data.Routes" :key="i">
-              <v-card
-              class="mx-auto"
-              max-width="500"
-              min-height="500"
-              >
-              <!-- <iframe
-              width="100%"
-              height="350"
-              :src= "route.iframeData" >
-              >
-              </iframe> -->
-                <v-card-title>
-                {{ route.name }}
-              </v-card-title>
-              <v-card-subtitle class="pb-0">
-                Surface Type: {{ route.type }}
-                </v-card-subtitle>
-                <v-card-subtitle class="pb-0 pt-0">
-                Miles: {{ route.miles }}
-                </v-card-subtitle>
-              </v-card>
+              <v-lazy
+              v-model="isActive"
+              :options="{
+                threshold: .5
+                }"
+                >
+                <v-card
+                class="mx-auto"
+                max-width="500"
+                min-height="500"
+                >
+                <!-- <iframe
+                width="100%"
+                height="350"
+                :src= "route.iframeData" >
+                >
+                </iframe> -->
+                  <v-card-title>
+                  {{ route.name }}
+                </v-card-title>
+                <v-card-subtitle class="pb-0">
+                  Surface Type: {{ route.type }}
+                  </v-card-subtitle>
+                  <v-card-subtitle class="pb-0 pt-0">
+                  Miles: {{ route.miles }}
+                  </v-card-subtitle>
+                </v-card>
+              </v-lazy>
             </v-col>
           </v-row> 
         </div>
@@ -57,6 +64,7 @@ import Search from '../components/SearchGQL'
     name: 'AllRoutes',
     data: () => {
       return {
+        isActive: false,
       }
     },
     components: {
