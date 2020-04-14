@@ -1,5 +1,22 @@
 <template>
-    <v-container>
+<div>
+    <v-parallax
+    src="../../public/assets/topo.jpg"
+    class="m-0"
+    height="350"
+  >
+    <v-row
+      align="center"
+      justify="center"
+    >
+      <v-col class="text-center" cols="12">
+        <h1 class="display-3 font-weight-thin mb-4">Bike Routes</h1>
+        <!-- <h4 class="subheading">Build your application today!</h4> -->
+      </v-col>
+    </v-row>
+  </v-parallax>
+      <v-container>
+
         <h1>Route Elevation Change</h1>
         <hr>
 
@@ -36,6 +53,7 @@
         </section>
 
     </v-container>
+</div>
 </template>
 
 <script>
@@ -100,10 +118,9 @@ dl {
 }
 
 .percentage {
-  font-size: .8em;
   line-height: 1;
   text-transform: uppercase;
-  width: 100%;
+  width: 80%;
   height: 40px;
   margin-left: 30%;
   background: repeating-linear-gradient(
@@ -117,12 +134,14 @@ dl {
   &:after {
     content: "";
     display: block;
-    background-color: #3b86d8;
+    background-color: #607D8B;
     margin-bottom: 10px;
     height: 85%;
     position: relative;
     top: 30%;
     transform: translateY(-50%);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
   }
 }
 

@@ -38,12 +38,14 @@
 
                 <div v-if="loading" class="loading apollo">
                     <v-list-item>
+                        <v-icon color="white" class="pr-2">mdi-arrow-down-bold-circle-outline</v-icon>
                         <v-list-item-content>Loading...</v-list-item-content>
                     </v-list-item>
                 </div>
 
                 <div v-else-if="error" class="error apollo">
                     <v-list-item>
+                        <v-icon color="white" class="pr-2">mdi-alert-circle</v-icon>
                         <v-list-item-content>An Error Occured...</v-list-item-content>
                     </v-list-item>
                 </div>
@@ -65,6 +67,7 @@
 
                     <div v-else class="no-result apollo">
                     <v-list-item>
+                        <v-icon color="white" class="pr-2">mdi-clipboard-alert</v-icon>
                         <v-list-item-content>No Results...</v-list-item-content>
                     </v-list-item>
                     </div>
