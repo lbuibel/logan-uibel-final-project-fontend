@@ -2,6 +2,20 @@
     <v-container>
         <h1>Top 10 Routes</h1>
         <hr>
+
+        <section v-if="error">
+            <v-alert type="success">
+            I'm a success alert.
+            </v-alert>
+        </section>
+
+        <section v-else>
+            <div v-if="loading" class="text-center"> 
+                   <v-progress-circular
+                indeterminate
+                color="primary"
+                ></v-progress-circular>
+            </div>
           <v-row class="flex-wrap">
               <v-col col="12" xs="12" sm="12"
               v-for="(route) in routes"
@@ -25,7 +39,7 @@
                 </div>
               </v-col>
           </v-row>
-
+        </section>
 
     </v-container>
 </template>
@@ -37,14 +51,17 @@ import axios from "axios"
 export default {
 data () {
     return {
-      routes: null
+      routes: null,
+      loading: true,
+      error: false,
     }
   },
   mounted () {
     axios
       .get('https://bike-routes-api.herokuapp.com/course/getAllCourses')
       .then(response => (this.routes = response.data.slice(0, 10)))
-      .catch(error => console.log(error))
+      .catch(error => console.log(error))   
+      .finally(() => this.loading = false)
   }
 
     }

@@ -21,11 +21,18 @@
         <hr>
 
         <section v-if="error">
-            <p>Unable to retrieve data</p>
+            <v-alert type="error">
+            Error loading.
+            </v-alert>        
         </section>
 
         <section v-else>
-            <div v-if="loading">Loading...</div>
+            <div v-if="loading" class="text-center"> 
+                   <v-progress-circular
+                indeterminate
+                color="primary"
+                ></v-progress-circular>
+            </div>
 
         <dl>
             <dd v-for="(route) in routes"

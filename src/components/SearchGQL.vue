@@ -61,6 +61,7 @@
                         <v-list-item-subtitle>Starting Elevation {{  route.startingElevation }} ft.</v-list-item-subtitle>
                         <v-list-item-subtitle>Final Elevation {{  route.finalElevation }} ft.</v-list-item-subtitle>
                         <v-list-item-subtitle>Elevation Gain {{  route.finalElevation - route.startingElevation }} ft.</v-list-item-subtitle>
+                        <v-list-item-subtitle>Route ID: {{  route.id }}</v-list-item-subtitle>
                     </v-list-item-content>
                     </v-list-item>
                 </div>

@@ -49,7 +49,7 @@
             text
             color="primary"
             large
-            to="add-route">Add Route</v-btn> 
+            to="add-route">Admin</v-btn> 
 
         </v-list-item-group>
       </v-list>

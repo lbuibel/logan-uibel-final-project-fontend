@@ -1,4 +1,4 @@
-<template>
+<template class="wrapper">
     <ApolloMutation
     :mutation="require('../graphql/AddRoute.gql')"
     :variables="{
@@ -14,48 +14,120 @@
         @done="onDone"
         class="mt-10"
     >
-    <template v-slot="{ mutate, loading, error }">
+    <template v-slot="{ mutate, error }">
         <!-- Form here -->
-        <v-form>
-            <v-container>
-                <h2>Add Route</h2>
-                <v-row>
-                    <v-col cols="12" sm="8" md="6">
-                        <v-text-field v-model="name" label="Name" required></v-text-field>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col cols="12" sm="8" md="6">
-                        <v-select
-                        v-model="type"
-                        label="Route Type"
-                        :items="types"
-                        >
-                        </v-select>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col cols="12" sm="8" md="6">
-                        <v-text-field v-model.number="miles" label="Miles" required></v-text-field>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col cols="6" sm="4" md="3">
-                        <v-text-field v-model.number="startingElevation" label="Starting Elevation" required></v-text-field>
-                    </v-col>
-                    <v-col cols="6" sm="4" md="3">
-                        <v-text-field v-model.number="finalElevation" label="Final Elevation" required></v-text-field>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col cols="12" sm="8" md="6">
-                        <v-text-field v-model="iframeData" label="iframe" required @change="iframeEdit()"></v-text-field>
-                    </v-col>
-                </v-row>
+        <v-form
+            ref="form"
+            v-model="valid"
+            :lazy-validation="lazy"
+            >
+            <v-row align="center">
+                <v-col cols="12" sm="6">
+                    <h2>Add Route</h2>
 
-                <v-btn large primary :disabled="loading" @click="mutate()">Add Route</v-btn>
-                <p v-if="error">An Error occured: {{ error }}</p>
-            </v-container>
+                    <v-text-field
+                    v-model="name" 
+                    label="Route Name" 
+                    required
+                    :rules="nameRules"
+                    >
+                    </v-text-field>
+
+                    <v-select
+                    v-model="type"
+                    label="Route Type"
+                    :items="types"
+                    :rules="[v=> !!v || 'Type is required']"
+                    required
+                    >
+                    </v-select>
+
+                    <v-text-field
+                    v-model.number="miles"
+                    label="Miles"
+                    required
+                    :rules="[v=> !!v || 'Miles are required']"
+                    >
+                    </v-text-field>
+
+                    <v-text-field
+                    v-model.number="startingElevation"
+                    label="Starting Elevation"
+                    required
+                    :rules="[v=> !!v || 'Starting elevation is required']"
+                    >
+                    </v-text-field>
+
+                    <v-text-field
+                    v-model.number="finalElevation"
+                    label="Final Elevation"
+                    required
+                    :rules="[v=> !!v || 'Final elevation is required']"
+                    >
+                    </v-text-field>
+
+                    <v-text-field
+                    v-model="iframeData"
+                    label="iframe"
+                    required
+                    @change="iframeEdit()"
+                    :rules="[v=> !!v || 'iframe is required']"
+                    >
+                    </v-text-field>
+
+                    <v-checkbox
+                        v-model="checkbox"
+                        :rules="[v => !!v || 'Map must be correct to continue!']"
+                        label="iframe is correct?"
+                        required
+                        >
+                    </v-checkbox>
+
+            <!-- <v-btn large primary :disabled="loading" @click="mutate()">Add Route</v-btn> -->
+                </v-col>
+
+                <v-col cols="12" sm="6">
+                    <section v-if="!iframeInput">
+                        <iframe
+                        height="350"
+                        width="100%"
+                        >
+                        </iframe>
+                    </section>
+                    <section v-if="iframeInput">
+                        <iframe
+                        height="350"
+                        width="100%"
+                        :src= iframeData
+                        >
+                        </iframe>
+                    </section>
+                </v-col>            
+            </v-row>  
+
+                <v-btn
+                :disabled="!valid"
+                color="success"
+                class="mr-4"
+                @click="mutate()"
+                >
+                Add Route
+                </v-btn>
+
+                <v-btn
+                color="error"
+                class="mr-4"
+                @click="reset"
+                >
+                Reset
+                </v-btn>
+
+                <section v-if="error">
+                    <v-alert type="error">
+                        Error loading.
+                    </v-alert>        
+                </section>
+
         </v-form>
     </template>
     </ApolloMutation>
@@ -73,7 +145,14 @@ export default {
             startingElevation: 0,
             finalElevation: 0,
             iframeData: '',
-            types: ['paved', 'singletrack', 'gravel']
+            types: ['paved', 'singletrack', 'gravel'],
+            iframeInput: false,
+            valid: true,
+            nameRules: [
+                v => !!v || 'Name is required',
+            ],
+            checkbox: false,
+            lazy: false,
         }
     },
     methods: {
@@ -81,10 +160,18 @@ export default {
             return console.log('Done')
         },
         iframeEdit() {
+            this.$refs.form.validate()
             const width = this.iframeData.indexOf('width')
             const height = this.iframeData.indexOf('height')
-            return String(this.iframeData = (this.iframeData.slice(13, width) + this.iframeData.slice(height + 13).slice(0,-10)))
-        }
+            return [String(this.iframeData = (this.iframeData.slice(13, width) + this.iframeData.slice(height + 13).slice(0,-10))), this.iframeInput = true]
+        },
+        reset () {
+        this.$refs.form.reset()
+      },
     }
 }
 </script>
+
+<style scoped>
+
+</style>
