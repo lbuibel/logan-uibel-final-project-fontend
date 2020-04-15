@@ -1,6 +1,6 @@
-<template class="wrapper">
-    <div>
-    <ApolloMutation
+<template>
+    <v-card class="pa-3 mx-auto mb-5">
+    <p class="display-1 text--primary mb-0">Add Route</p>    <ApolloMutation
     :mutation="require('../graphql/AddRoute.gql')"
     :variables="{
         name,
@@ -13,7 +13,7 @@
         iframeData,
         }"
         @done="onDone"
-        class="mt-10"
+        class="mt-0"
     >
     <template v-slot="{ mutate, error }">
         <!-- Form here -->
@@ -24,7 +24,6 @@
             >
             <v-row align="center">
                 <v-col cols="12" sm="6">
-                    <h2>Add Route</h2>
 
                     <v-text-field
                     v-model="name" 
@@ -145,7 +144,7 @@
         Close
       </v-btn>
     </v-snackbar>
-    </div>
+    </v-card>
 
 </template>
 
