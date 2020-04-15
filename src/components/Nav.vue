@@ -69,16 +69,5 @@
 </script>
 
 <style>
-  .v-application a {
-    color: white;
-    text-decoration: none;
-  }
 
-  .v-list--nav {
-    padding: 0;
-  }
-
-    .v-list--item {
-    padding: 0;
-  }
 </style>
