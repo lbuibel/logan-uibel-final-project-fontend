@@ -1,8 +1,10 @@
 <template>
 <v-container>
-   <AddRoute></AddRoute>
-   <update/>
-   <Delete/>
+        <h1>GraphQl admin</h1>
+        <br>
+        <AddRoute></AddRoute>
+        <update/>
+        <Delete/>
 
 </v-container>
 </template>
@@ -17,6 +19,8 @@ export default {
         AddRoute,
         Delete,
         update
-    }
+    },
+    data: () => ({
+    }),
 }
 </script>

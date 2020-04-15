@@ -49,7 +49,14 @@
             text
             color="primary"
             large
-            to="add-route">Admin</v-btn> 
+            to="add-route">GRAPHQL Admin</v-btn> 
+
+            <v-btn 
+            block
+            text
+            color="primary"
+            large
+            to="add-route-rest">REST Admin</v-btn> 
 
         </v-list-item-group>
       </v-list>

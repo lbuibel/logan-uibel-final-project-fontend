@@ -1,6 +1,7 @@
 <template>
     <v-card class="pa-3 mx-auto mb-5">
-    <p class="display-1 text--primary mb-0">Add Route</p>    <ApolloMutation
+    <p class="display-1 text--primary mb-0">Add Route</p> 
+    <ApolloMutation
     :mutation="require('../graphql/AddRoute.gql')"
     :variables="{
         name,

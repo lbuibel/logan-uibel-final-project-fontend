@@ -6,10 +6,10 @@
 
 <script>
 
-import Admin from "@/components/Admin.vue"
+import Admin from "@/components/RestAdmin.vue"
 
 export default {
-    name: "admin",
+    name: "restadmin",
     components: {
         Admin
     }
