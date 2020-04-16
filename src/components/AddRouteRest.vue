@@ -169,6 +169,8 @@ import axios from 'axios'
         .then(response => {
             console.log(response)
             this.route = response.data
+            this.snackbar = true
+            this.$refs.form.reset()
             console.log(this.route)
         }).catch(error => console.log(error))
 
