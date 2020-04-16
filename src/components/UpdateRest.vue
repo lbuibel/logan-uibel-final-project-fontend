@@ -1,6 +1,6 @@
 <template>
     <v-card class="pa-3 mx-auto mb-5">
-    <p class="display-1 text--primary mb-0">Add Route</p> 
+    <p class="display-1 text--primary mb-0">Update Route</p> 
 
     <v-form
     ref="form"
@@ -8,7 +8,14 @@
     :lazy-validation="lazy"
     >
     <v-row>
-        <v-col cols="12" sm="6">
+            <v-col cols="12" sm="6">
+            <v-text-field
+            v-model="id"
+            label="Route ID"
+            required
+            >
+            </v-text-field>
+
             <v-text-field
             v-model="name"
             label="Route Name"
@@ -90,9 +97,9 @@
         :disabled="!valid"
         color="success"
         class="mr-4"
-        @click="createRoute()"
+        @click="updateRoute()"
         >
-        Add Route
+        Update Route
         </v-btn>
 
         <v-btn
@@ -124,6 +131,7 @@ import axios from 'axios'
 
   export default {
     data: () => ({
+        id: '',
         name: '',
         type: '',
         miles: '',
@@ -142,7 +150,7 @@ import axios from 'axios'
         lazy: false,
         checkbox: false,
         snackbar: false,
-        text: 'Route Added',
+        text: 'Route Updated',
         timeout: 2000,
     }),
     methods: {
@@ -155,15 +163,16 @@ import axios from 'axios'
         reset () {
         this.$refs.form.reset()
         },
-        createRoute() {
-        const url = `https://bike-routes-api.herokuapp.com/course/add-course`;
-        const data = {
-          name: this.name,
-          type: this.type,
-          miles: this.miles,
-          startingElevation: this.startingElevation,
-          finalElevation: this.finalElevation,
-          iframeData: this.iframeData
+        updateRoute() {
+          const url = `https://bike-routes-api.herokuapp.com/course/update-course/` + this.id;
+          console.log(url)
+          const data = {
+            name: this.name,
+            type: this.type,
+            miles: this.miles,
+            startingElevation: this.startingElevation,
+            finalElevation: this.finalElevation,
+            iframeData: this.iframeData
         }
         axios.post(url, data)
         .then(response => {

@@ -30,7 +30,12 @@
                 <div v-if="loading" class="loading apollo">Loading...</div>
 
                 <!-- Error -->
-                <div v-else-if="error" class="error apollo">An error occured</div>
+                <div v-else-if="error" class="error apollo">
+                        <v-list-item>
+                        <v-icon color="white" class="pr-2">mdi-alert-circle</v-icon>
+                        <v-list-item-content>An Error Occured...</v-list-item-content>
+                    </v-list-item>
+                </div>
 
                 <!-- Result -->
                 <div v-else-if="data" class="result apollo">  
@@ -76,20 +81,18 @@
                             </v-list-item>
                         </div>
 
-                        <div v-else-if="error" class="error apollo">
-                            <v-list-item>
-                                <v-icon color="white" class="pr-2">mdi-alert-circle</v-icon>
-                                <v-list-item-content>An Error Occured...</v-list-item-content>
-                            </v-list-item>
-                        </div>
+                <div v-else-if="error" class="error apollo">
+                        <v-list-item>
+                        <v-icon color="white" class="pr-2">mdi-alert-circle</v-icon>
+                        <v-list-item-content>An Error Occured...</v-list-item-content>
+                    </v-list-item>
+                </div>
 
                         <div v-else-if="data" class="result apollo">
                             <div
                             v-for="(route, i) in data.Routes" 
                             :key="i"
                             >
-
-
 
                             <v-checkbox
                                 v-model="checkbox"
