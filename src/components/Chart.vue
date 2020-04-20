@@ -29,8 +29,9 @@
         <section v-else>
             <div v-if="loading" class="text-center"> 
                    <v-progress-circular
-                indeterminate
-                color="primary"
+                    indeterminate
+                    color="primary"
+                    class="mt-5"
                 ></v-progress-circular>
             </div>
 
