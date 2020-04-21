@@ -163,7 +163,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
   export default {
     data: () => ({
@@ -205,13 +205,13 @@ import axios from 'axios'
           // Items have already been requested
           if (this.isLoading) return
 
-          this.isLoading = true
+          this.isLoading = false
 
-        axios
-        .get('https://bike-routes-api.herokuapp.com/course/getAllCourses')
-        .then(response => (this.entries = response.data))
-        .catch(error => console.log(error))
-        .finally(() => (this.isLoading = false))
+        // axios
+        // .get('https://bike-routes-api.herokuapp.com/course/getAllCourses')
+        // .then(response => (this.entries = response.data))
+        // .catch(error => console.log(error))
+        // .finally(() => (this.isLoading = false))
           }
       },
       methods: {

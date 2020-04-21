@@ -16,9 +16,7 @@
   </v-parallax>
     
     <v-container>
-   <h1>Routes</h1>
-   <hr>
-  <Search></Search>
+  <search/>
        <!-- Apollo watched Graphql query -->
     <ApolloQuery
       :query="require('../graphql/AllRoutes.gql')"
@@ -37,7 +35,7 @@
         <!-- Result -->
         <div v-else-if="data" class="result apollo">  
           <v-row class="flex-wrap">
-            <v-col col="12" xs="12" sm="12" md="6" v-for="(route, i) in data.Routes" :key="i">
+            <v-col cols="12" xs="12" sm="6" md="6" lg="4" v-for="(route, i) in data.Routes" :key="i">
               <v-lazy
               v-model="isActive"
               :options="{

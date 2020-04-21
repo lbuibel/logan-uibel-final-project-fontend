@@ -1,4 +1,4 @@
-mutation AddRoute ($id: String!, $name: String!, $type: String!, $miles: Float!, $startPoint: String!, $endPoint: String!, $startingElevation: Int!, $finalElevation: Int, $iframeData: String!){
+mutation AddRoute ($id: String!, $name: String!, $type: String!, $miles: Float!, $startingElevation: Int!, $finalElevation: Int, $iframeData: String!){
 updateOneRoute (
     where: { 
         id: $id
@@ -7,8 +7,6 @@ updateOneRoute (
     name: $name,
     type: $type,
     miles: $miles,
-    startPoint: $startPoint,
-    endPoint: $endPoint,
     startingElevation: $startingElevation,
     finalElevation: $finalElevation,
     iframeData: $iframeData

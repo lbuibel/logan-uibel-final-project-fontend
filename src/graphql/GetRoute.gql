@@ -1,0 +1,10 @@
+query getRoute ($id: String) {
+  Route(id: $id) {
+    id
+    name
+    type
+    miles
+    startingElevation
+    finalElevation
+  }
+}

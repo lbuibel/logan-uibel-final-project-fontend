@@ -1,115 +1,135 @@
 <template>
-    <div>
-        <!-- <input v-model="searchString" placeholder="Search"><br> -->
-        <!-- {{ entries }} -->
-        <v-card
-            color="grey darken-1"
-            dark
-            >
-            <v-card-title class="headline grey">
-            Quick Search
-            </v-card-title>
-            <v-card-text>
-            <v-autocomplete
-                v-model="searchString"
-                :items="items"
-                :loading="isLoading"
-                :search-input.sync="search"
-                color="white"
-                hide-no-data
-                hide-selected
-                item-text="Description"
-                label="Routes"
-                placeholder="Search Name"
-                prepend-icon="mdi-database-search"
-                return-object
-                class="mt-4"
-            ></v-autocomplete>
-            </v-card-text>
-            <v-divider></v-divider>
-        <v-expand-transition>
-        <v-list v-if="searchString" class="grey">
-
+   <div>
+       <v-card>
+        <v-card-title class="headline">
+            Search By Name
+        </v-card-title>
+        <v-card-text>
+             <!-- QUERY TO LOAD ROUTE NAMES FOR AUTOSUGGESTION -->
+            <!-- NAME IS THEN USED BY ANOTHER QUERY GET SPECIFIC ROUTE ID ETC -->
             <ApolloQuery
-            :query="require('../graphql/SearchRoutes.gql')"
-            :variables="{ searchString }"
+            :query="require('../graphql/AllRoutes.gql')"
             >
             <template v-slot="{ result: { loading, error, data } }">
+                <!-- Loading -->
+                <div v-if="loading" class="loading apollo">Loading...</div>
 
-                <div v-if="loading" class="loading apollo">
-                    <v-list-item>
-                        <v-icon color="white" class="pr-2">mdi-arrow-down-bold-circle-outline</v-icon>
-                        <v-list-item-content>Loading...</v-list-item-content>
-                    </v-list-item>
-                </div>
-
+                <!-- Error -->
                 <div v-else-if="error" class="error apollo">
-                    <v-list-item>
+                        <v-list-item>
                         <v-icon color="white" class="pr-2">mdi-alert-circle</v-icon>
                         <v-list-item-content>An Error Occured...</v-list-item-content>
                     </v-list-item>
                 </div>
 
-                <div v-else-if="data" class="result apollo">
-                    <v-list-item
-                    v-for="(route, i) in data.Routes" 
-                    :key="i"
-                    >
-                    <v-list-item-content>
-                        <v-list-item-title> {{  route.name }}</v-list-item-title>
-                        <v-list-item-subtitle>Miles: {{  route.miles }}</v-list-item-subtitle>
-                        <v-list-item-subtitle>Starting Elevation {{  route.startingElevation }} ft.</v-list-item-subtitle>
-                        <v-list-item-subtitle>Final Elevation {{  route.finalElevation }} ft.</v-list-item-subtitle>
-                        <v-list-item-subtitle>Elevation Gain {{  route.finalElevation - route.startingElevation }} ft.</v-list-item-subtitle>
-                        <v-list-item-subtitle>Route ID: {{  route.id }}</v-list-item-subtitle>
-                    </v-list-item-content>
-                    </v-list-item>
+                <!-- Result -->
+                <div v-else-if="data" class="result apollo">  
+                        <v-autocomplete
+                        v-model="searchString"
+                        :items= "data.Routes.map(route => route.name)"
+                        :loading="isLoading"
+                        :search-input.sync="search"
+                        color="blue"
+                        hide-no-data
+                        hide-selected
+                        item-text="Description"
+                        label="Routes"
+                        placeholder="Start typing to Search"
+                        prepend-icon="mdi-database-search"
+                        return-object
+                        class="mt-2 mb-0"
+                    ></v-autocomplete>
                 </div>
+                <!-- No result -->
+                <div v-else class="no-result apollo">No result :(</div>
+            </template>
+            </ApolloQuery>
+        </v-card-text>
+        <v-divider></v-divider>
+             <!-- SECTION EXPANDS BASED ON "SEARCHSTRING" BEING ENTERED -->    
+            <!-- EXPANDED SECTION CONTAINS REMAINING FORM INPUTS FOR ROUTE UPDATE -->
+            <v-expand-transition>
+            <v-list v-if="searchString">
 
-                    <div v-else class="no-result apollo">
-                    <v-list-item>
-                        <v-icon color="white" class="pr-2">mdi-clipboard-alert</v-icon>
-                        <v-list-item-content>No Results...</v-list-item-content>
-                    </v-list-item>
-                    </div>
+             <!-- USES "SEARCHSTRING" TO SEARCH FOR SPECIFIC ROUTE -->
+            <!-- ONLY RETURNS NEEDED ROUTE FOR POPULATING ID INTO THE FORM FOR USER -->
+                <ApolloQuery
+                :query="require('../graphql/SearchRoutes.gql')"
+                :variables="{ searchString }"
+                >
+                    <template v-slot="{ result: { loading, error, data } }">
+
+                        <div v-if="loading" class="loading apollo">
+                            <v-list-item>
+                                <v-icon color="white" class="pr-2">mdi-arrow-down-bold-circle-outline</v-icon>
+                                <v-list-item-content>Loading...</v-list-item-content>
+                            </v-list-item>
+                        </div>
+
+                        <div v-else-if="error" class="error apollo">
+                            <v-list-item>
+                                <v-icon color="white" class="pr-2">mdi-alert-circle</v-icon>
+                                <v-list-item-content>An Error Occured...</v-list-item-content>
+                            </v-list-item>
+                        </div>
+
+                        <div v-else-if="data" class="result apollo">
+                            <v-list-item
+                            v-for="(route, i) in data.Routes" 
+                            :key="i"
+                            >
+                            <v-list-item-content>
+                                <v-list-item-title> {{  route.name }}</v-list-item-title>
+                                <v-list-item-subtitle>Miles: {{  route.miles }}</v-list-item-subtitle>
+                                <v-list-item-subtitle>Starting Elevation {{  route.startingElevation }} ft.</v-list-item-subtitle>
+                                <v-list-item-subtitle>Final Elevation {{  route.finalElevation }} ft.</v-list-item-subtitle>
+                                <v-list-item-subtitle>Elevation Gain {{  route.finalElevation - route.startingElevation }} ft.</v-list-item-subtitle>
+                                <iframe
+                                width="100%"
+                                height="350"
+                                :src= "route.iframeData"
+                                class="mt-2"
+                                >
+                                </iframe>
+                            </v-list-item-content>
+                            </v-list-item>
+                        </div>
+
+                        <div v-else class="no-result apollo">
+                            <v-list-item>
+                                <v-icon color="white" class="pr-2">mdi-clipboard-alert</v-icon>
+                                <v-list-item-content>No Results...</v-list-item-content>
+                            </v-list-item>
+                        </div>
                     </template>
                 </ApolloQuery>
-
-        </v-list>
-            <v-expand-transition>
+            </v-list>
+            <v-expand-transition></v-expand-transition>
             </v-expand-transition>
-
-    </v-expand-transition>
-        <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn
-        :disabled="!searchString"
-        color="grey darken-3"
-        @click="searchString = null"
-      >
-        Clear
-        <v-icon right>mdi-close-circle</v-icon>
-      </v-btn>
-    </v-card-actions>
-        </v-card>
-
-
-
-
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                    <v-btn
+                    :disabled="!searchString"
+                    color="grey"
+                    @click="searchString = null"
+                    >
+                    Clear
+                    <v-icon right>mdi-close-circle</v-icon>
+                </v-btn>
+            </v-card-actions>
+       </v-card>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
   export default {
     data: () => ({
-      descriptionLimit: 60,
-      searchString: '',
-      entries: [],
-      isLoading: false,
-      model: null,
-      search: null
+    searchString: '',
+    isLoading: false,
+    model: null,
+    search: null,
     }),
       computed: {
       fields () {
@@ -134,13 +154,7 @@ import axios from 'axios'
           if (this.isLoading) return
 
           this.isLoading = true
-
-        axios
-        .get('https://bike-routes-api.herokuapp.com/course/getAllCourses')
-        .then(response => (this.entries = response.data))
-        .catch(error => console.log(error))
-        .finally(() => (this.isLoading = false))
           }
-      }
+      },
   }
 </script>

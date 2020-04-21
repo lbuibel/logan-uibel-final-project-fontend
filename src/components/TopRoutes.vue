@@ -43,6 +43,8 @@
                 <div class="large-card">
                   <div class="toproute-info">
                     <h4> {{route.name}}</h4>
+                    <h4> {{route.miles}}</h4>
+                    <h4> {{route.averageGrade}}</h4>
                   </div>
                 </div>
               </v-col>

@@ -9,8 +9,6 @@
         name,
         type,
         miles,
-        startPoint,
-        endPoint,
         startingElevation,
         finalElevation,
         iframeData,
@@ -109,7 +107,7 @@
                             :rules="[v=> !!v || 'Name is required']"
                             >
                             </v-text-field>
-
+                                {{ route.id }}
                             <v-select
                             v-model="type"
                             label="Route Type"
@@ -214,23 +212,6 @@
                 </v-col>            
             </v-row>  
 
-                <!-- <v-btn
-                :disabled="!valid"
-                color="success"
-                class="mr-4"
-                @click="mutate()"
-                >
-                Update Route
-                </v-btn>
-
-                <v-btn
-                color="error"
-                class="mr-4"
-                @click="reset"
-                >
-                Reset
-                </v-btn> -->
-
                 <section v-if="error">
                     <v-alert type="error">
                         Error Updating Route.
@@ -257,7 +238,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
   export default {
     data: () => ({
@@ -265,8 +246,6 @@ import axios from 'axios'
     name: '',
     type: '',
     miles: 0,
-    startPoint: '123',
-    endPoint: '456',
     startingElevation: 0,
     finalElevation: 0,
     iframeData: '',
@@ -309,13 +288,13 @@ import axios from 'axios'
           // Items have already been requested
           if (this.isLoading) return
 
-          this.isLoading = true
+          this.isLoading = false
 
-        axios
-        .get('https://bike-routes-api.herokuapp.com/course/getAllCourses')
-        .then(response => (this.entries = response.data))
-        .catch(error => console.log(error))
-        .finally(() => (this.isLoading = false))
+        // axios
+        // .get('https://bike-routes-api.herokuapp.com/course/getAllCourses')
+        // .then(response => (this.entries = response.data))
+        // .catch(error => console.log(error))
+        // .finally(() => (this.isLoading = false))
           }
       },
       methods: {
@@ -336,10 +315,3 @@ import axios from 'axios'
       }
   }
 </script>
-
-<style scoped>
-.wrapper {
-    border: 1px solid red;
-    padding: 2%;
-}
-</style>
