@@ -17,6 +17,7 @@
 
         <!-- Result -->
         <div v-else-if="data" class="result apollo">  
+
           <v-row class="flex-wrap">
             <v-col cols="12" xs="12" sm="6" md="6" lg="4" v-for="(route, i) in data.Routes" :key="i">
               <v-lazy

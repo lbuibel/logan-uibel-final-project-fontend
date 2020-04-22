@@ -42,6 +42,13 @@
         <section>
           <p class="title mt-10 mb-0">Distance Comparison</p>
         </section>
+            <div v-if="loading" class="text-center"> 
+            <v-progress-circular
+            indeterminate
+            color="primary"
+            class="mt-5"
+            ></v-progress-circular>
+          </div>
           <dl>
             <!-- CLASS DETERMINES HOW WIDE/BIG THE BAR IN THE BAR GRAPH IS -->
             <dd v-for="(route) in routes"

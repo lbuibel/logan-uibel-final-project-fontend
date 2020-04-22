@@ -8,5 +8,6 @@ query getRoute ($id: String!){
     miles
     startingElevation
     finalElevation
+    iframeData
   }
 }

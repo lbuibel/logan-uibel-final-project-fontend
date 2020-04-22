@@ -40,7 +40,8 @@
     </section>
 
     <!-- USES AllROUTES QUERY -->
-    <gqlroutes/>
+    <!-- <gqlroutes/> -->
+    <allroutes/>
 
 
 
@@ -51,7 +52,8 @@
 <script>
 import NameSearch from '../components/SearchByNameGQL'
 import IdSearch from '../components/SearchByIdGQL'
-import gqlroutes from '../components/AllRoutesGQL'
+// import gqlroutes from '../components/AllRoutesGQL'
+import allroutes from '../components/AllRoutesGQL2'
 
   export default {
     name: 'AllRoutes',
@@ -64,7 +66,8 @@ import gqlroutes from '../components/AllRoutesGQL'
     components: {
       NameSearch,
       IdSearch,
-      gqlroutes
+      // gqlroutes,
+      allroutes
     },
     methods: {
       idSearch (){

@@ -5,5 +5,7 @@ query allRoutes {
     type
     miles
     iframeData
+    startingElevation
+    finalElevation
   }
 }

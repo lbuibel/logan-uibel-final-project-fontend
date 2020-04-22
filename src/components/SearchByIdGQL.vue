@@ -48,6 +48,23 @@
 
                         <div v-else-if="data" class="result apollo">
                             {{ data.route.name }}
+                            <v-list-item>
+                                <v-list-item-content>
+                                    <v-list-item-title> {{  data.route.name }}</v-list-item-title>
+                                    <v-list-item-subtitle>Distance: {{  data.route.miles }} miles</v-list-item-subtitle>
+                                    <v-list-item-subtitle>Starting Elevation {{  data.route.startingElevation }} ft.</v-list-item-subtitle>
+                                    <v-list-item-subtitle>Final Elevation {{  data.route.finalElevation }} ft.</v-list-item-subtitle>
+                                    <v-list-item-subtitle>Elevation Gain {{  data.route.finalElevation - data.route.startingElevation }} ft.</v-list-item-subtitle>
+                                    <v-list-item-subtitle>Average Grade: {{ (((data.route.finalElevation - data.route.startingElevation) / (data.route.miles*5280)) * 100).toFixed(1)  }}%</v-list-item-subtitle>
+                                    <iframe
+                                    width="100%"
+                                    height="350"
+                                    :src= "data.route.iframeData"
+                                    class="mt-2"
+                                    >
+                                    </iframe>
+                                </v-list-item-content>
+                            </v-list-item>
                         </div>
 
                         <div v-else class="no-result apollo">
