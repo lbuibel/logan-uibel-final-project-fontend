@@ -1,5 +1,7 @@
-query getRoute ($id: String) {
-  Route(id: $id) {
+query getRoute ($id: String!){
+  route (where: {
+    id: $id
+    }) {
     id
     name
     type

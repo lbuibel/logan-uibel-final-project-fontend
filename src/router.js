@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 
 import Home from '../views/Home.vue'
 import GraphQlAdmin from '../views/GraphQLAdmin.vue'
-import TopRoutes from '../views/TopRoutes.vue'
-import Chart from '../views/Chart.vue'
+// import TopRoutes from '../views/TopRoutes.vue'
+import HomeRest from '../views/HomeRest.vue'
 import RestAdmin from '../views/RestAdmin.vue'
 
 Vue.use(VueRouter)
@@ -17,22 +17,17 @@ export default new VueRouter({
             component: Home
         },
         {
-            path: '/add-route',
+            path: '/graphql-admin',
             name: "graphqladmin",
             component: GraphQlAdmin
         },
         {
-            path: '/top-routes',
-            name: 'topRoutes',
-            component: TopRoutes
+            path: '/home-rest',
+            name: 'homerest',
+            component: HomeRest
         },
         {
-            path: '/elevation',
-            name: 'elevation',
-            component: Chart
-        },
-        {
-            path: '/add-route-rest',
+            path: '/rest-admin',
             name: "restadmin",
             component: RestAdmin
         }

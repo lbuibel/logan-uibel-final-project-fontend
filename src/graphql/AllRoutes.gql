@@ -1,5 +1,6 @@
 query allRoutes {
   Routes {
+    id
     name
     type
     miles

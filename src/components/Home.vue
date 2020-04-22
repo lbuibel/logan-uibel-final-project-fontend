@@ -1,99 +1,89 @@
 <template>
   <div>
-      <v-parallax
-    src="../../public/assets/bike_sign.jpeg"
-    class="m-0"
-  >
-    <v-row
+
+  <!-- HOME PAGE HERO IMAGE -->
+  <v-parallax
+      src="../../public/assets/bike_sign.jpeg"
+      class="m-0"
+      >
+      <v-row
       align="center"
       justify="center"
-    >
-      <v-col class="text-center" cols="12">
-        <h1 class="display-3 font-weight-thin mb-4">Bike Routes</h1>
-        <!-- <h4 class="subheading">Build your application today!</h4> -->
-      </v-col>
-    </v-row>
+      >
+        <v-col class="text-center" cols="12">
+          <h1 class="display-3 font-weight-thin mb-4">Route Guide</h1>
+          <h4 class="subheading">The best cycling routes Utah has to offer</h4>
+        </v-col>
+      </v-row>
   </v-parallax>
     
     <v-container>
-  <search/>
-       <!-- Apollo watched Graphql query -->
-    <ApolloQuery
-      :query="require('../graphql/AllRoutes.gql')"
-    >
-      <template v-slot="{ result: { loading, error, data } }">
-        <!-- Loading -->
-        <div v-if="loading" class="loading apollo">Loading...</div>
+    <section>
+      <p class="display-1 text-center mt-10">Getting Started</p>
+      <p class="text-center body-1 mb-10">The Route Guide database contains some of the best routes for both cycling and motorcycling in Utah.  Look up some of our favorite routes below.</p>
+    </section>
+    <!-- SEARCH FOR ROUTE BY NAME - SEARCHES GRAPHQL DATABASE -->
+    <!-- SEARCH FUNCTION USES ALLROUTES AND SEARCHROUTES QUERY -->
+    <nameSearch class="mt-10"></nameSearch>
+    <p class="font-weight-light body-2 primary--text id-link mt-1" @click="idSearch()">Know the id of the route you're looking for?</p>
+  
+    <!-- IF USER KNOWS THE ROUTE ID FOR THE ROUTE THEY ARE LOOKING FOR -->
+    <!-- THE CAN SELECT THE TEXT ABOVE AND SEARCH ONLY FOR THAT ROUTE -->
+    <section v-if="searchById">
+      <!-- USES GETROUTE QUERY -->
+      <idSearch/>
+    </section>
 
-        <!-- Error -->
-                <div v-else-if="error" class="error apollo">
-                        <v-list-item>
-                        <v-icon color="white" class="pr-2">mdi-alert-circle</v-icon>
-                        <v-list-item-content>An Error Occured...</v-list-item-content>
-                    </v-list-item>
-                </div>
-        <!-- Result -->
-        <div v-else-if="data" class="result apollo">  
-          <v-row class="flex-wrap">
-            <v-col cols="12" xs="12" sm="6" md="6" lg="4" v-for="(route, i) in data.Routes" :key="i">
-              <v-lazy
-              v-model="isActive"
-              :options="{
-                threshold: .5
-                }"
-                >
-                <v-card
-                class="mx-auto"
-                max-width="500"
-                min-height="500"
-                >
-                <!-- <iframe
-                width="100%"
-                height="350"
-                :src= "route.iframeData" >
-                >
-                </iframe> -->
-                  <v-card-title>
-                  {{ route.name }}
-                </v-card-title>
-                <v-card-subtitle class="pb-0">
-                  Surface Type: {{ route.type }}
-                  </v-card-subtitle>
-                  <v-card-subtitle class="pb-0 pt-0">
-                  Miles: {{ route.miles }}
-                  </v-card-subtitle>
-                </v-card>
-              </v-lazy>
-            </v-col>
-          </v-row> 
-        </div>
+    <section>
+      <p class="display-1 text-center mt-10">All Routes</p>
+      <p class="text-center body-1 mb-10">Route are continually added, so be sure to stay up to date!</p>
+    </section>
 
-        <!-- No result -->
-        <div v-else class="no-result apollo">No result :(</div>
-      </template>
-    </ApolloQuery>
+    <!-- USES AllROUTES QUERY -->
+    <gqlroutes/>
+
+
 
   </v-container>
   </div>
 </template>
 
 <script>
-import Search from '../components/SearchGQL'
+import NameSearch from '../components/SearchByNameGQL'
+import IdSearch from '../components/SearchByIdGQL'
+import gqlroutes from '../components/AllRoutesGQL'
+
   export default {
     name: 'AllRoutes',
     data: () => {
       return {
         isActive: false,
+        searchById: false
       }
     },
     components: {
-      Search,
+      NameSearch,
+      IdSearch,
+      gqlroutes
     },
+    methods: {
+      idSearch (){
+        console.log('test')
+        if (this.searchById === false){
+          this.searchById = true
+        } else {
+          this.searchById = false
+        }
+      }
+    }
   }
 </script>
 
 <style scoped>
-v-img {
-  border: solid red;
+.id-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
+
 </style>
+

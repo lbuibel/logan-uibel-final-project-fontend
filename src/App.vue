@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Nav/>
+    <Navbar/>
 
     <v-content>
 
@@ -9,20 +9,21 @@
       </transition>
 
     </v-content>
+    <bottomFooter/>
   </v-app>
 </template>
 
 <script>
-import Nav from './components/Nav'
-// import ApolloExample from './components/ApolloExample';
-// import AllRoutes from './components/AllRoutes'
-// import AddRoute from './components/AddRoute'
+import Navbar from './components/Navbar'
+import bottomFooter from './components/footer'
+
 
 export default {
   name: 'App',
 
   components: {
-    Nav
+    Navbar,
+    bottomFooter
     // AllRoutes,
     // AddRoute,
   },

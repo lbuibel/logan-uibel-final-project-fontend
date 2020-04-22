@@ -1,9 +1,10 @@
 <template>
 <v-container>
-        <h1>REST admin</h1>
-        <br>
+        <!-- ADDS ROUTE TO REST API -->
         <AddRoute/>
+        <!-- UPDATES ROUTE TO REST API -->
         <UpdateRoute/>
+        <!-- REMOVES ROUTE TO REST API -->
         <DeleteRoute/>
 
 </v-container>

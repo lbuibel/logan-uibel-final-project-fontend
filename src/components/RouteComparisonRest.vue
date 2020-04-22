@@ -1,41 +1,33 @@
 <template>
-<div>
-    <v-parallax
-    src="../../public/assets/topo.jpg"
-    class="m-0"
-    height="350"
-  >
-    <v-row
-      align="center"
-      justify="center"
-    >
-      <v-col class="text-center" cols="12">
-        <h1 class="display-3 font-weight-thin mb-4">Bike Routes</h1>
-        <!-- <h4 class="subheading">Build your application today!</h4> -->
-      </v-col>
-    </v-row>
-  </v-parallax>
+  <div>
+
+
+    <!-- PAGE INTRO -->
       <v-container>
+        <section>
+          <p class="title mt-10 mb-0">Grade Comparison</p>
+        </section>
 
-        <h1>Route Elevation Change</h1>
-        <hr>
-
+        <!-- ERROR HADNLING FOR AXIOS API CALL -->
         <section v-if="error">
             <v-alert type="error">
             Error loading.
             </v-alert>        
         </section>
 
+        <!-- DISPLAYS LOADING WHEEL WHILE CHART IS STILL LOADING -->
+        <!-- DISPLAYS INFO AFTER LOADING IS DONE -->
+        <!-- MAKES USE OF THE 'getAllCourses' ENPOINT IN API -->
         <section v-else>
-            <div v-if="loading" class="text-center"> 
-                   <v-progress-circular
-                    indeterminate
-                    color="primary"
-                    class="mt-5"
-                ></v-progress-circular>
-            </div>
+          <div v-if="loading" class="text-center"> 
+            <v-progress-circular
+            indeterminate
+            color="primary"
+            class="mt-5"
+            ></v-progress-circular>
+          </div>
 
-        <dl>
+          <dl>
             <dd v-for="(route) in routes"
             :key="route.id"
             v-bind:class="['percentage', `percentage-${ (Math.floor(route.finalElevation/100 - route.startingElevation/100))*2 }`]"
@@ -43,25 +35,27 @@
             <span class="elevation-change"> {{ route.finalElevation - route.startingElevation }} ft.</span>
             <span class="text">{{ route.name }}</span>
             </dd>
-        </dl>
-        <br>
-        <br>
+          </dl>
+          <br>
+          <br>
 
-        <h1>Route Distance</h1>
-        <hr>
-        <dl>
+        <section>
+          <p class="title mt-10 mb-0">Distance Comparison</p>
+        </section>
+          <dl>
+            <!-- CLASS DETERMINES HOW WIDE/BIG THE BAR IN THE BAR GRAPH IS -->
             <dd v-for="(route) in routes"
             :key="route.id"
             v-bind:class="['percentage', `percentage-${ (Math.floor(route.miles)*3) }`]"
             >
-            <span class="elevation-change"> {{ route.miles }} miles</span>
-            <span class="text">{{ route.name }}</span>
+              <span class="elevation-change"> {{ route.miles }} miles</span>
+              <span class="text">{{ route.name }}</span>
             </dd>
-        </dl>
+          </dl>
         </section>
 
-    </v-container>
-</div>
+      </v-container>
+  </div>
 </template>
 
 <script>
@@ -102,7 +96,8 @@ dl {
 }
 
 
-
+// SLYLING FOR TEXT WITHIN ELEVATION BAR ON GRAPH
+// POSITIONS IT ON THE BAR ITSELF
 .elevation-change {
     color: white;
     font-size: .75rem;
@@ -110,7 +105,7 @@ dl {
     padding-left: 1%;
     z-index: 20;
     position: absolute;
-    transform: translateY(50%)
+    transform: translateY(50%);
 }
 
 .text {
@@ -123,6 +118,9 @@ dl {
   position: absolute;
   left: 0;
   justify-content: flex-start;
+  @media (max-width: 500px){
+      font-size: .65rem;
+  }
 }
 
 .percentage {
@@ -131,6 +129,7 @@ dl {
   width: 80%;
   height: 40px;
   margin-left: 30%;
+  // CREATES VERTICAL BARS ON GRAPH
   background: repeating-linear-gradient(
   to right,
   #ddd,
@@ -138,11 +137,11 @@ dl {
   #fff 1px,
   #fff 5%
 );
-  
+  // STYLING FOR THE ELEVATION BARS
   &:after {
     content: "";
     display: block;
-    background-color: #607D8B;
+    background-color: #1776D2;
     margin-bottom: 10px;
     height: 85%;
     position: relative;

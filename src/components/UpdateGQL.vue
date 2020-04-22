@@ -49,15 +49,10 @@
                         filled
                         v-model="searchString"
                         :items= "data.Routes.map(route => route.name)"
-                        :loading="isLoading"
-                        :search-input.sync="search"
                         color="blue"
-                        hide-no-data
-                        hide-selected
                         item-text="Description"
                         label="Routes"
                         placeholder="Start typing to Search"
-                        return-object
                         class="mt-2 mb-0"
                     ></v-autocomplete>
                 </div>
@@ -107,7 +102,6 @@
                             :rules="[v=> !!v || 'Name is required']"
                             >
                             </v-text-field>
-                                {{ route.id }}
                             <v-select
                             v-model="type"
                             label="Route Type"
@@ -254,49 +248,11 @@
     valid: true,
     checkbox: false,
     lazy: false,
-
-    descriptionLimit: 60,
     searchString: '',
-    entries: [],
-    isLoading: false,
-    model: null,
-    search: null,
-
     snackbar: false,
     text: 'Route Updated',
     timeout: 2000,
     }),
-      computed: {
-      fields () {
-        if (!this.searchString) return []
-
-        return Object.keys(this.searchString).map(key => {
-          return {
-            key,
-            value: this.searchString[key] || 'n/a',
-          }
-        })
-      },
-      items () {
-          return this.entries.map(entry => entry.name)
-      }
-      },
-      watch: {
-          search () {
-          if (this.items.length > 0) return
-
-          // Items have already been requested
-          if (this.isLoading) return
-
-          this.isLoading = false
-
-        // axios
-        // .get('https://bike-routes-api.herokuapp.com/course/getAllCourses')
-        // .then(response => (this.entries = response.data))
-        // .catch(error => console.log(error))
-        // .finally(() => (this.isLoading = false))
-          }
-      },
       methods: {
         onDone() {
             this.snackbar = true

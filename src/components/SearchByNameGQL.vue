@@ -27,16 +27,10 @@
                         <v-autocomplete
                         v-model="searchString"
                         :items= "data.Routes.map(route => route.name)"
-                        :loading="isLoading"
-                        :search-input.sync="search"
                         color="blue"
-                        hide-no-data
-                        hide-selected
-                        item-text="Description"
                         label="Routes"
                         placeholder="Start typing to Search"
                         prepend-icon="mdi-database-search"
-                        return-object
                         class="mt-2 mb-0"
                     ></v-autocomplete>
                 </div>
@@ -80,7 +74,7 @@
                             >
                             <v-list-item-content>
                                 <v-list-item-title> {{  route.name }}</v-list-item-title>
-                                <v-list-item-subtitle>Miles: {{  route.miles }}</v-list-item-subtitle>
+                                <v-list-item-subtitle>Distance: {{  route.miles }} miles</v-list-item-subtitle>
                                 <v-list-item-subtitle>Starting Elevation {{  route.startingElevation }} ft.</v-list-item-subtitle>
                                 <v-list-item-subtitle>Final Elevation {{  route.finalElevation }} ft.</v-list-item-subtitle>
                                 <v-list-item-subtitle>Elevation Gain {{  route.finalElevation - route.startingElevation }} ft.</v-list-item-subtitle>
@@ -122,39 +116,10 @@
 </template>
 
 <script>
-// import axios from 'axios'
 
   export default {
     data: () => ({
     searchString: '',
-    isLoading: false,
-    model: null,
-    search: null,
     }),
-      computed: {
-      fields () {
-        if (!this.searchString) return []
-
-        return Object.keys(this.searchString).map(key => {
-          return {
-            key,
-            value: this.searchString[key] || 'n/a',
-          }
-        })
-      },
-      items () {
-          return this.entries.map(entry => entry.name)
-      }
-      },
-      watch: {
-          search () {
-          if (this.items.length > 0) return
-
-          // Items have already been requested
-          if (this.isLoading) return
-
-          this.isLoading = true
-          }
-      },
   }
 </script>

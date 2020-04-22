@@ -6,10 +6,10 @@
 
 <script>
 
-import Routes from "@/components/TopRoutes.vue"
+import Routes from "@/components/HomeRest.vue"
 
 export default {
-    name: "topRoutes",
+    name: "HomeRest",
     components: {
         Routes
     }
