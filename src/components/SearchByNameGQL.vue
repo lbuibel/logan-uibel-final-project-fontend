@@ -106,7 +106,8 @@
                 <v-spacer></v-spacer>
                     <v-btn
                     :disabled="!searchString"
-                    color="grey"
+                    color="#EA4235"
+                    outlined
                     @click="searchString = null"
                     >
                     Clear

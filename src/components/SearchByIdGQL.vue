@@ -86,7 +86,8 @@
                 <v-spacer></v-spacer>
                     <v-btn
                     :disabled="!id"
-                    color="grey"
+                    color="#EA4235"
+                    outlined
                     @click="id = null"
                     >
                     Clear

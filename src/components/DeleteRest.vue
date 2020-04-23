@@ -27,6 +27,7 @@
     </v-row>
 
         <v-btn
+        outlined
         :disabled="!valid"
         color="success"
         class="mr-4"
@@ -36,7 +37,8 @@
         </v-btn>
 
         <v-btn
-        color="error"
+        outlined
+        color="#EA4235"
         class="mr-4"
         @click="reset"
         >

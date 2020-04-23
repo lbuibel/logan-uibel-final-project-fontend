@@ -81,8 +81,6 @@
                         required
                         >
                     </v-checkbox>
-
-            <!-- <v-btn large primary :disabled="loading" @click="mutate()">Add Route</v-btn> -->
                 </v-col>
 
                 <v-col cols="12" sm="6">
@@ -107,6 +105,7 @@
                 <v-btn
                 :disabled="!valid"
                 color="success"
+                outlined
                 class="mr-4"
                 @click="mutate()"
                 >
@@ -114,7 +113,8 @@
                 </v-btn>
 
                 <v-btn
-                color="error"
+                outlined
+                color="#EA4235"
                 class="mr-4"
                 @click="reset"
                 >

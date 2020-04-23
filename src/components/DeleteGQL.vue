@@ -40,7 +40,6 @@
                 <!-- Result -->
                 <div v-else-if="data" class="result apollo">  
                         <v-autocomplete
-                        filled
                         v-model="searchString"
                         :items= "data.Routes.map(route => route.name)"
                         color="blue"
@@ -99,6 +98,7 @@
                             </v-checkbox>
 
                             <v-btn
+                            outlined
                             :disabled="!valid"
                             color="success"
                             class="mr-4"
@@ -108,7 +108,8 @@
                             </v-btn>
 
                             <v-btn
-                            color="error"
+                            outlined
+                            color="#EA4235"
                             class="mr-4"
                             @click="reset"
                             >
