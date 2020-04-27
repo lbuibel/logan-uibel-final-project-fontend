@@ -1,5 +1,7 @@
 # Bike Route Frontend
 This frontend built using Vue utilizes a [RESTful](https://github.com/lbuibel/logan-uibel-RESTful-Node-Server) api built with Nodejs, and a [GRAPHQL](https://github.com/lbuibel/logan-uibel-graphql-server) api built with Prisma and Apollo Server.
+## Setting up the server
+To fully view this project, downloading and running a GraphQL server is first required. To do so, check out [logan-uibel-graphql-server](https://github.com/lbuibel/logan-uibel-graphql-server). Follow the instructions under 'How to Use/Starting from scratch', to start running the GraphQL server.
 
 ## Getting Started
 Clone this repository:

@@ -47,7 +47,6 @@
                         </div>
 
                         <div v-else-if="data" class="result apollo">
-                            {{ data.route.name }}
                             <v-list-item>
                                 <v-list-item-content>
                                     <v-list-item-title> {{  data.route.name }}</v-list-item-title>
